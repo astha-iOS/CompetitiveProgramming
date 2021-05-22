@@ -106,9 +106,55 @@ class FindMaxNumberByInsertingNTest:XCTestCase{
     
 }
 
+class UnUsedCardDetectTest:XCTestCase{
+    private var unUsedCardDetect: UnUsedCardDetect!
+    override func setUp() {
+        super.setUp()
+        unUsedCardDetect = UnUsedCardDetect()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+    }
+    
+    func test_unusedCard(){
+                    
+        let arrCardId = [15,12,10,18,19]
+        let arrT :[[String:Any]] = [["T":1,"C":12],
+                                          ["T":2,"C":15],
+                                          ["T":3,"C":12],
+                                          ["T":4,"C":18],
+                                          ["T":5,"C":15],
+                                          ["T":6,"C":12],
+                                          ["T":7,"C":12],
+                                         ]
+            
+        let unusedCard = unUsedCardDetect.unUsedCardDetect(arrCardId:arrCardId, arrT: arrT)
+        XCTAssertEqual(unusedCard, "10 19")
+    }
+    
+    func test_WhenAllCardUsed(){
+                    
+        let arrCardId = [15,12,10,18,19]
+        let arrT :[[String:Any]] = [["T":1,"C":12],
+                                          ["T":2,"C":15],
+                                          ["T":3,"C":12],
+                                          ["T":4,"C":18],
+                                          ["T":5,"C":15],
+                                          ["T":6,"C":10],
+                                          ["T":7,"C":19],
+                                         ]
+            
+        let unusedCard = unUsedCardDetect.unUsedCardDetect(arrCardId:arrCardId, arrT: arrT)
+        XCTAssertEqual(unusedCard, "Empty list")
+    }
+    
+}
+
 TestRunner().runTests(textClass: SumTwoNumberTest.self)
 TestRunner().runTests(textClass: MultiplyTwoNumberTest.self)
 TestRunner().runTests(textClass: RemoveArrayDuplicateTest.self)
 TestRunner().runTests(textClass: FindMaxNumberByInsertingNTest.self)
+TestRunner().runTests(textClass: UnUsedCardDetectTest.self)
 
 
